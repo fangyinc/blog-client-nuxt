@@ -66,6 +66,11 @@
   export default {
     name: 'create',
     layout: 'simple',
+    head () {
+      return {
+        title: '新建文章'
+      }
+    },
     data () {
       return {
         // mdValue: '',

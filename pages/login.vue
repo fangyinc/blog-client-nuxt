@@ -36,6 +36,11 @@
 <script>
   export default {
     name: 'login',
+    head () {
+      return {
+        title: '登录'
+      }
+    },
     data: () => ({
       dialog: true,
       valid: true,

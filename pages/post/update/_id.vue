@@ -56,6 +56,9 @@
     <div>
       <v-btn color="info" @click="upload">更新文章</v-btn>
     </div>
+    <no-ssr>
+      <vm-back-top></vm-back-top>
+    </no-ssr>
   </v-card>
 
 </template>
@@ -64,16 +67,19 @@
   import mdEditor from '../../../components/common/MdEditor'
   import InfoCreate from '../../../components/common/InfoCreate'
   import postApi from '../../../api/post'
+  const VmBackTop = () => import('vue-multiple-back-top')
 
   export default {
     name: 'updatePostById',
     layout: 'simple',
+    head () {
+      return {
+        title: '更新文章'
+      }
+    },
     data () {
       return {
         post: {},
-        // cateModel: [],
-        // tagModel: [],
-        // secModel: [],
         codeStyle: '',
         htmlValue: '',
         mdValue: '',
@@ -209,7 +215,8 @@
     },
     components: {
       Editor: mdEditor,
-      NewInfo: InfoCreate
+      NewInfo: InfoCreate,
+      VmBackTop
     }
   }
 </script>

@@ -1,6 +1,5 @@
 <template>
   <v-card class="elevation-6">
-    <!--<vm-back-top></vm-back-top>-->
     <v-card-title primary-title>
       <div class="headline mx-auto">
         <span>{{post.title}}</span>
@@ -41,7 +40,7 @@
 			</span>
       <span
           v-bind:class="{'hidden-sm-and-down': true}"
-          v-for="(sec, index) in post.sections" :key="index">
+          v-for="sec in post.sections" :key="sec.name">
         <nuxt-link :to="`/section/` + sec.id" class="cfy-my-link">
           <v-icon>view_column</v-icon>
 					<span>{{sec.name || null}}</span>

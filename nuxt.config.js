@@ -46,7 +46,7 @@ module.exports = {
   ],
   dev: (process.env.NODE_ENV !== 'production'),
   env: {
-    baseUrl: this.dev ? 'http://localhost:8801' : 'https://chengfangyin.cn:8443',
+    baseUrl: process.env.NODE_ENV !== 'production' ? 'http://localhost:8801' : 'https://chengfangyin.cn:8443',
     defaultUserId: 1
   },
   /*
@@ -73,9 +73,9 @@ module.exports = {
     },
     vendor: [
       '~/plugins/vuetify.js', // 打包到库文件以获得更好的缓存
-      '~/api/init.js',
-      'mavon-editor',
-      '~/plugins/aliyun-oss.js'
+      '~/api/init.js'
+      // 'mavon-editor' 这里不打包阿里云 mavon-editor, 因为只有我编辑文章才用得到，蛤蛤蛤哈哈, 下面的aliyun-oss同理
+      // '~/plugins/aliyun-oss.js'
     ],
     extractCSS: true,
     /*

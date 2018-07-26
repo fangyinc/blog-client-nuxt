@@ -40,7 +40,7 @@ async def push_and_pull():
     local('git push')
     with cd(server_dir):
         run('git pull')
-#        run('cnpm install')
+        run('cnpm install')
 
 def pm2():
     with cd(server_dir):

@@ -1,6 +1,5 @@
 <template>
   <v-card>
-    <!--<vm-back-top></vm-back-top>-->
     <v-card-title>
       <div class="headline mx-auto">归档</div>
     </v-card-title>
@@ -35,15 +34,24 @@
         </v-list>
       </v-flex>
     </v-layout>
+    <no-ssr>
+      <vm-back-top></vm-back-top>
+    </no-ssr>
   </v-card>
 </template>
 
 <script>
   import postApi from '../../api/post'
   import axios from 'axios'
+  const VmBackTop = () => import('vue-multiple-back-top')
 
   export default {
     name: 'archive',
+    head () {
+      return {
+        title: '归档'
+      }
+    },
     async asyncData () {
       let items = await postApi.archive()
         .then(res => {
@@ -65,6 +73,9 @@
         items: items,
         posts: posts
       }
+    },
+    components: {
+      VmBackTop
     }
   }
 </script>

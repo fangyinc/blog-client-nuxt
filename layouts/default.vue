@@ -24,6 +24,12 @@
   import myHeader from '../components/layout/Header'
 
   export default {
+    name: 'DefaultLayout',
+    head () {
+      return {
+        title: '程方银的博客'
+      }
+    },
     components: {
       rightSide,
       myHeader

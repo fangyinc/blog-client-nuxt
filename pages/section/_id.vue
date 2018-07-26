@@ -12,17 +12,26 @@
                     @input="pageChanged"
                     :total-visible="7"></v-pagination>
     </v-card-title>
+    <no-ssr>
+      <vm-back-top></vm-back-top>
+    </no-ssr>
   </v-card>
 </template>
 
 <script>
   import postInfo from '../../components/common/PostInfo'
   import postApi from '../../api/post'
+  const VmBackTop = () => import('vue-multiple-back-top')
 
   export default {
     validate ({ params }) {
       // Must be a number
       return /^\d+$/.test(params.id)
+    },
+    head () {
+      return {
+        title: '专栏(' + this.infoName + ')'
+      }
     },
     name: 'sectionId',
     data () {
@@ -89,7 +98,8 @@
       }
     },
     components: {
-      postInfo
+      postInfo,
+      VmBackTop
     }
 
   }

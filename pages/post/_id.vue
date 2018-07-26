@@ -2,7 +2,6 @@
 	<div>
     <post-detail :post="post"></post-detail>
     <v-card class="elevation-4" v-if="post.comments.length">
-      <!--<vm-back-top></vm-back-top>-->
       <v-card-title>
         <div class="headline">
           <span>留言 ({{post.comments.length}}条)</span>
@@ -29,6 +28,9 @@
                     :content="commentContent" :user="commentUser"
                     @upload="uploadComment"
                     @change="commentChange"></comment-editor>
+    <no-ssr>
+      <vm-back-top></vm-back-top>
+    </no-ssr>
   </div>
 </template>
 
@@ -40,6 +42,7 @@
   import postApi from '../../api/post'
   import commentApi from '../../api/comment'
   const commentEditor = () => import('../../components/common/CommentEditor')
+  const VmBackTop = () => import('vue-multiple-back-top')
 
   export default {
     validate ({ params }) {
@@ -47,11 +50,19 @@
       return /^\d+$/.test(params.id)
     },
     name: 'PostShowById',
+    head () {
+      return {
+        // 经过测试发现这里如果使用this.post.title的话会在客户端渲染标题，
+        // 所以直接在asyncData中返回标题，确保在服务端就能渲染标题
+        title: this.title
+      }
+    },
     async asyncData ({route}) {
       let post = await postApi.getPostById(route.params.id)
         .then(res => { return res.data.body }).catch(err => console.log(err))
       return {
-        post: post
+        post: post,
+        title: post.title
       }
     },
     data () {
@@ -136,7 +147,8 @@
     components: {
       postDetail,
       commentShow,
-      commentEditor
+      commentEditor,
+      VmBackTop
     }
   }
 </script>
