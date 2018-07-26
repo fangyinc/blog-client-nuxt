@@ -1,5 +1,6 @@
 const nodeExternals = require('webpack-node-externals')
 // const resolve = (dir) => require('path').join(__dirname, dir)
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   /*
@@ -95,6 +96,23 @@ module.exports = {
             whitelist: [/^vuetify/]
           })
         ]
+      }
+      let plugins = [
+        // 去掉 console的输出
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            compress: {
+              warnings: false,
+              drop_debugger: true,
+              drop_console: true,
+            },
+          },
+          sourceMap: false,
+          parallel: true
+        })
+      ]
+      if (!ctx.isDev) {
+        config.plugins = [...config.plugins, ...plugins]
       }
     }
   }

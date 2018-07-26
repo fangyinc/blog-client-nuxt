@@ -40,7 +40,7 @@ async def push_and_pull():
     local('git push')
     with cd(server_dir):
         run('git pull')
-        run('cnpm install')
+#        run('cnpm install')
 
 def pm2():
     with cd(server_dir):
@@ -48,6 +48,9 @@ def pm2():
         run(text)
         sudo('systemctl restart nginx')
 
+def npm_install():
+    with cd(server_dir):
+        run('cnpm install')
 def deploy():
     loop = asyncio.get_event_loop()
     tasks = [build(), push_and_pull()]
