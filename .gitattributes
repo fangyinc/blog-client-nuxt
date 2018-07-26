@@ -1,0 +1,5 @@
+*.css linguist-language=JavaScript
+*.less linguist-language=JavaScript
+*.styl linguist-language=JavaScript
+*.js linguist-language=JavaScript
+*.html linguist-language=JavaScript
