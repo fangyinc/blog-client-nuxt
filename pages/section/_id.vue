@@ -24,10 +24,10 @@
   const VmBackTop = () => import('vue-multiple-back-top')
 
   export default {
-    validate ({ params }) {
-      // Must be a number
-      return /^\d+$/.test(params.id)
-    },
+    // validate ({ params }) {
+    //   // Must be a number
+    //   return /^\d+$/.test(params.id)
+    // },
     head () {
       return {
         title: '专栏(' + this.infoName + ')'
