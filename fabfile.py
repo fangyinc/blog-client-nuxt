@@ -33,14 +33,15 @@ def upload():
     local(upload_script)
 
 async def build():
-#    local('npm run build')
+    local('rm -rf .nuxt')
+    local('npm run build')
     upload()
 
 async def push_and_pull():
     local('git push')
     with cd(server_dir):
         run('git pull')
-        run('npm run build')
+#        run('npm run build')
         run('cnpm install')
 
 def pm2():
@@ -53,10 +54,8 @@ def npm_install():
     with cd(server_dir):
         run('cnpm install')
 def deploy():
-#    loop = asyncio.get_event_loop()
-#    tasks = [build(), push_and_pull()]
-#    loop.run_until_complete(asyncio.wait(tasks))
-#    loop.close()
-#    pm2()
-    push_and_pull()
+    loop = asyncio.get_event_loop()
+    tasks = [build(), push_and_pull()]
+    loop.run_until_complete(asyncio.wait(tasks))
+    loop.close()
     pm2()

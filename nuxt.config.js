@@ -46,7 +46,7 @@ module.exports = {
   ],
   dev: (process.env.NODE_ENV !== 'production'),
   env: {
-    baseUrl: process.env.NODE_ENV !== 'production' ? 'http://localhost:8801' : 'https://chengfangyin.cn:8443',
+    baseUrl: (process.env.NODE_ENV !== 'production') ? 'http://localhost:8801' : 'https://chengfangyin.cn:8443',
     defaultUserId: 1
   },
   /*
