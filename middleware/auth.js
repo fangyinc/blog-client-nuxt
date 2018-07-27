@@ -3,11 +3,11 @@
  */
 
 var requiresAuthPath = [
-  '/new-post',
   '/post/update',
   '/post/create',
   '/friend/create',
-  '/friend/update'
+  '/friend/update',
+  '/user/'
 ]
 
 function needAuth (fullPath) {
