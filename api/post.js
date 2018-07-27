@@ -31,8 +31,14 @@ const getAllTag = () => {
 const deleteTagById = (id) => {
   return request('/tags/' + id, {}, 'delete')
 }
+const getTagById = (id) => {
+  return request('/tags/' + id)
+}
 const getALlCate = () => {
   return request('/cates')
+}
+const getCateById = (id) => {
+  return request('/cates/' + id)
 }
 const deleteCateById = (id) => {
   return request('/cates/' + id, {}, 'delete')
@@ -42,6 +48,9 @@ const getAllSection = () => {
 }
 const deleteSectionById = (id) => {
   return request('/sections/' + id, {}, 'delete')
+}
+const getSectionById = (id) => {
+  return request('/sections/' + id)
 }
 const getPostByCateId = (id, page = 1) => {
   return request('/cates/posts/' + id + '?page=' + (page - 1))
@@ -86,5 +95,8 @@ export default {
   deletePostById,
   deleteCateById,
   deleteTagById,
-  deleteSectionById
+  deleteSectionById,
+  getTagById,
+  getCateById,
+  getSectionById
 }

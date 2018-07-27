@@ -8,7 +8,7 @@
         @delete="deleteInfo">
     </post-info>
     <v-card-title>
-      <v-pagination :length="totalPages" v-model="page" class="mx-auto"
+      <v-pagination :length="totalPages" v-model="currentPage" class="mx-auto"
                     @input="pageChanged"
                     :total-visible="7"></v-pagination>
     </v-card-title>
@@ -20,47 +20,34 @@
 <script>
   import postInfo from '../../components/common/PostInfo'
   import postApi from '../../api/post'
+  import {GET_CATE_ID_POST, GET_CATE_BY_ID} from '../../store/category'
   const VmBackTop = () => import('vue-multiple-back-top')
 
   export default {
-    // validate ({ params }) {
-    //   // Must be a number
-    //   return /^\d+$/.test(params.id)
-    // },
+    validate ({ params }) {
+      // Must be a number
+      return /^\d+$/.test(params.id)
+    },
     name: 'categoryId',
     head () {
       return {
         title: '分类(' + this.infoName + ')'
       }
     },
+    fetch ({store, route}) {
+      return Promise.all([
+        store.dispatch('category/' + GET_CATE_ID_POST, {id: route.params.id, page: 1}),
+        store.dispatch('category/' + GET_CATE_BY_ID, route.params.id)
+      ])
+    },
     data () {
       return {
-        totalPages: 0,
-        page: 1,
-        totalElements: 0,
-        posts: []
+        currentPage: 1
       }
-    },
-    mounted () {
-      this.getPosts()
     },
     methods: {
       pageChanged () {
-        this.getPosts()
-      },
-      getPosts () {
-        let $vm = this
-        postApi.getPostByCateId(this.$route.params.id, this.page)
-          .then(res => {
-            $vm.$log.debug(res.data.body.content)
-            $vm.totalPages = res.data.body.totalPages
-            $vm.totalElements = res.data.body.totalElements
-            $vm.posts = res.data.body.content
-          })
-          .catch(res => {
-            $vm.$log.info('获取分类信息失败')
-            $vm.$log.info(res.data)
-          })
+        return this.$store.dispatch('category/' + GET_CATE_ID_POST, {id: this.$route.params.id, page: this.currentPage})
       },
       deleteInfo () {
         let $vm = this
@@ -88,12 +75,17 @@
       canEdit () {
         return this.$store.state.user.isLogin
       },
+      posts () {
+        return this.$store.state.category.postList.list
+      },
+      totalElements () {
+        return this.$store.state.category.postList.totalElements
+      },
+      totalPages () {
+        return this.$store.state.category.postList.totalPages
+      },
       infoName () {
-        if (this.posts.length > 0) {
-          return this.posts[0].category.name
-        } else {
-          return ''
-        }
+        return this.$store.state.category.info.name
       }
     },
     components: {

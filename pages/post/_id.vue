@@ -45,10 +45,10 @@
   const VmBackTop = () => import('vue-multiple-back-top')
 
   export default {
-    // validate ({ params }) {
-    //   // Must be a number
-    //   return /^\d+$/.test(params.id)
-    // },
+    validate ({ params }) {
+      // Must be a number
+      return /^\d+$/.test(params.id)
+    },
     name: 'PostShowById',
     head () {
       return {

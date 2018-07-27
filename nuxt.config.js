@@ -44,7 +44,7 @@ module.exports = {
     'quill/dist/quill.snow.css',
     'quill/dist/quill.bubble.css'
   ],
-  dev: (process.env.NODE_ENV === 'dev'),
+  dev: (process.env.NODE_ENV !== 'production'),
   env: {
     defaultUserId: 1
   },
