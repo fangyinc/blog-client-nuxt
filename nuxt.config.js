@@ -28,6 +28,7 @@ module.exports = {
     { src: '~/plugins/vue-notification.js', ssr: false },
     { src: '~/plugins/aliyun-oss.js', ssr: false },
     { src: '~/plugins/vue-back-top.js', ssr: false },
+    { src: '~/plugins/analytics.js', ssr: false },
     { src: '~/plugins/google-analytics.js', ssr: false }
   ],
   router: {
