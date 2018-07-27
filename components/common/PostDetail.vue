@@ -7,9 +7,11 @@
       <v-btn color="primary" fab small v-if="canEdit" @click="deletePost">
         <v-icon medium class="icon-pos">delete</v-icon>
       </v-btn>
-      <v-btn color="primary" fab small v-if="canEdit" :to="`/post/update/` + post.id">
-        <v-icon medium class="icon-pos">edit</v-icon>
-      </v-btn>
+      <nuxt-link :to="`/post/update/` + post.id" class="cfy-my-link">
+        <v-btn color="primary" fab small v-if="canEdit">
+          <v-icon medium class="icon-pos">edit</v-icon>
+        </v-btn>
+      </nuxt-link>
     </v-card-title>
     <v-divider></v-divider>
     <v-card-text v-show="true">

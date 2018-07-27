@@ -29,13 +29,15 @@
 			</v-card-media>
 			<v-list class="pt-0" dense>
 				<v-divider></v-divider>
-				<v-list-tile v-for="(item, index) in menuItems" :key="index" :to="item.url" v-if="item.active">
-					<v-list-tile-action>
-						<v-icon>{{ item.icon }}</v-icon>
-					</v-list-tile-action>
-					<v-list-tile-content>
-						<v-list-tile-title>{{ item.name }}</v-list-tile-title>
-					</v-list-tile-content>
+				<v-list-tile v-for="(item, index) in menuItems" :key="index" v-if="item.active">
+					<nuxt-link :to="item.url" class="cfy-my-link">
+            <v-list-tile-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+            </v-list-tile-content>
+					</nuxt-link>
 				</v-list-tile>
 				<v-divider></v-divider>
 
