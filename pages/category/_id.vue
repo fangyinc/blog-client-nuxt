@@ -21,7 +21,6 @@
   import postInfo from '../../components/common/PostInfo'
   import postApi from '../../api/post'
   import {GET_CATE_ID_POST, GET_CATE_BY_ID} from '../../store/category'
-  const VmBackTop = () => import('vue-multiple-back-top')
 
   export default {
     validate ({ params }) {
@@ -89,8 +88,7 @@
       }
     },
     components: {
-      postInfo,
-      VmBackTop
+      postInfo
     }
   }
 </script>

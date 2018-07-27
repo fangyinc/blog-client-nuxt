@@ -24,13 +24,14 @@
                     @input="pageChanged"
                     :total-visible="7"></v-pagination>-->
     </v-card>
+    <no-ssr>
     <comment-editor id="cmd"
                     :content="commentContent" :user="commentUser"
-                    @upload="uploadComment"
-                    @change="commentChange"></comment-editor>
-    <no-ssr>
-      <vm-back-top></vm-back-top>
+                    @upload="uploadComment"></comment-editor>
     </no-ssr>
+    <!--<no-ssr>-->
+      <vm-back-top></vm-back-top>
+    <!--</no-ssr>-->
   </div>
 </template>
 
@@ -38,11 +39,10 @@
   import postDetail from '../../components/common/PostDetail'
   // import commentEditor from '../../components/common/CommentEditor'
   import commentShow from '../../components/common/CommentShow'
-
-  import postApi from '../../api/post'
+  import {GET_POST_BY_ID} from '../../store/post'
+  // import postApi from '../../api/post'
   import commentApi from '../../api/comment'
   const commentEditor = () => import('../../components/common/CommentEditor')
-  const VmBackTop = () => import('vue-multiple-back-top')
 
   export default {
     validate ({ params }) {
@@ -57,14 +57,20 @@
         title: this.post.title
       }
     },
-    asyncData ({route, error}) {
-      return postApi.getPostById(route.params.id)
-        .then(res => { return {post: res.data.body} })
-        .catch(err => {
-          console.log(err)
+    async fetch ({route, store, error}) {
+      return store.dispatch('post/' + GET_POST_BY_ID, route.params.id)
+        .catch(res => {
           error({ statusCode: 404, message: '没有这篇文章' })
         })
     },
+    // asyncData ({route, error}) {
+    //   return postApi.getPostById(route.params.id)
+    //     .then(res => { return {post: res.data.body} })
+    //     .catch(err => {
+    //       console.log(err)
+    //       error({ statusCode: 404, message: '没有这篇文章' })
+    //     })
+    // },
     data () {
       return {
         commentContent: '',
@@ -76,9 +82,6 @@
       }
     },
     methods: {
-      commentChange (html) {
-        // this.commentContent = html
-      },
       uploadComment (commentContent) {
         // alert(this.commentContent)
         console.log(this.commentUser)
@@ -91,13 +94,13 @@
         }
         commentApi.uploadComment(this.post.id, comment)
           .then(res => {
-            this.$log.debug(res)
             this.$notify({
               group: 'post',
               title: '评论成功'
             })
             this.commentContent = ''
-            this.getPost()
+            // this.$router
+            this.$store.dispatch('post/' + GET_POST_BY_ID, this.$route.params.id)
           })
           .catch(err => {
             this.$log.error(err)
@@ -122,7 +125,7 @@
               group: 'post',
               title: '删除留言成功'
             })
-            this.getPost()
+            this.$store.dispatch('post/' + GET_POST_BY_ID, this.$route.params.id)
           })
           .catch(err => {
             this.$log.error(err)
@@ -148,13 +151,15 @@
           return this.post.comments.length
         }
         return 0
+      },
+      post () {
+        return this.$store.state.post.postDetail
       }
     },
     components: {
       postDetail,
       commentShow,
-      commentEditor,
-      VmBackTop
+      commentEditor
     }
   }
 </script>

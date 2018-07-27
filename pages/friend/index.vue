@@ -8,20 +8,29 @@
         <v-card-text>
           <v-list three-line>
             <template v-for="(item, index) in items">
-              <a :href="item.siteUrl" target="_blank" :key="item.username" style="text-decoration: none; color:black">
                 <v-list-tile
                     avatar
                 >
+                  <a :href="item.siteUrl" target="_blank" :key="index" class="cfy-my-link">
                   <v-list-tile-avatar>
                     <img :src="item.imgUrl">
                   </v-list-tile-avatar>
-
+                  </a>
                   <v-list-tile-content>
                     <v-list-tile-title v-html="item.username"></v-list-tile-title>
                     <v-list-tile-sub-title v-html="item.about"></v-list-tile-sub-title>
                   </v-list-tile-content>
+                  <v-spacer></v-spacer>
+
+                  <v-list-tile-avatar>
+                    <v-btn color="primary" fab small v-if="canEdit" @click="deleteFriend(item.id)">
+                      <v-icon medium class="icon-pos">delete</v-icon>
+                    </v-btn>
+                    <v-btn color="primary" fab small v-if="canEdit" :to="`/friend/update/` + item.id">
+                      <v-icon medium class="icon-pos">edit</v-icon>
+                    </v-btn>
+                  </v-list-tile-avatar>
                 </v-list-tile>
-              </a>
             </template>
           </v-list>
           <v-pagination :length="totalPages" v-model="page"
@@ -54,6 +63,26 @@
       this.getFriend()
     },
     methods: {
+      deleteFriend (id) {
+        if (!confirm('确认删除该友链吗?')) {
+          return
+        }
+        authApi.deleteFriendById(id)
+          .then(res => {
+            this.$notify({
+              group: 'user',
+              title: '友链删除成功'
+            })
+            this.$router.back()
+          })
+          .catch(err => {
+            console.debug(err)
+            this.$notify({
+              group: 'user',
+              title: '友链删除失败'
+            })
+          })
+      },
       cancel () {
         this.dialog = false
         this.$router.back()
@@ -70,6 +99,11 @@
       },
       pageChanged () {
         this.getFriend()
+      }
+    },
+    computed: {
+      canEdit () {
+        return this.$store.state.user.isLogin
       }
     }
   }

@@ -14,8 +14,8 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Nuxt.js + Vuetify.js project' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
     ]
   },
   plugins: [
@@ -26,7 +26,8 @@ module.exports = {
     { src: '~/plugins/mavon-editor.js', ssr: false },
     { src: '~/plugins/nuxt-quill-plugin.js', ssr: false },
     { src: '~/plugins/vue-notification.js', ssr: false },
-    { src: '~/plugins/aliyun-oss.js', ssr: false }
+    { src: '~/plugins/aliyun-oss.js', ssr: false },
+    { src: '~/plugins/vue-back-top.js', ssr: false }
   ],
   router: {
     middleware: ['auth']
@@ -72,7 +73,8 @@ module.exports = {
     },
     vendor: [
       '~/plugins/vuetify.js', // 打包到库文件以获得更好的缓存
-      '~/api/init.js'
+      '~/api/init.js',
+      '~/plugins/vue-back-top.js'
       // 'mavon-editor' 这里不打包阿里云 mavon-editor, 因为只有我编辑文章才用得到，蛤蛤蛤哈哈, 下面的aliyun-oss同理
       // '~/plugins/aliyun-oss.js'
     ],
@@ -110,7 +112,6 @@ module.exports = {
           parallel: true
         })
       ]
-      console.log(plugins)
       // if (!ctx.isDev) {
       //   config.plugins = [...config.plugins, ...plugins]
       // }

@@ -7,13 +7,14 @@ import postApi from '../api/post'
 export const GET_POST_LIST = 'GET_POST_LIST'
 export const SET_POST_LIST = 'SET_POST_LIST'
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
-
+export const GET_POST_BY_ID = 'GET_POST_BY_ID'
 export const state = () => ({
   list: [],
   pagination: {
     currentPage: 1,
     totalPages: 0
-  }
+  },
+  postDetail: {}
 })
 export const mutations = {
   SET_LIST (state, dataList) {
@@ -21,6 +22,9 @@ export const mutations = {
   },
   SET_PAGE (state, currentPage) {
     state.pagination.currentPage = currentPage
+  },
+  SET_POST (state, post) {
+    state.postDetail = post
   }
 }
 
@@ -51,5 +55,10 @@ export const actions = {
   },
   [SET_CURRENT_PAGE] ({commit}, currentPage) {
     commit('SET_PAGE', currentPage)
+  },
+  async [GET_POST_BY_ID] ({commit}, postId) {
+    let data = await postApi.getPostById(postId).then(res => { return res.data.body })
+    commit('SET_POST', data || {})
+    return data
   }
 }

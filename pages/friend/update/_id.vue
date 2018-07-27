@@ -40,7 +40,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click.native="cancel">取消</v-btn>
-          <v-btn color="blue darken-1" flat @click.native="submit">创建</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="submit">更新</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -48,10 +48,10 @@
 </template>
 
 <script>
-  import authApi from '../../api/user'
+  import authApi from '../../../api/user'
 
   export default {
-    name: 'createFriend',
+    name: 'UpdateFriend',
     data () {
       return {
         dialog: true,
@@ -67,7 +67,24 @@
         ]
       }
     },
+    mounted () {
+      this.getFriend()
+    },
     methods: {
+      getFriend () {
+        authApi.getFriendById(this.$route.params.id)
+          .then(res => {
+            let f = res.data.body
+            this.username = f.username || ''
+            this.name = f.name || ''
+            this.siteUrl = f.siteUrl || ''
+            this.imgUrl = f.imgUrl || ''
+            this.about = f.about || ''
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      },
       cancel () {
         this.$router.back()
       },
@@ -86,18 +103,12 @@
           .then(res => {
             this.$log.debug(res.data)
             this.dialog = false
-            this.$notify({
-              group: 'user',
-              title: '友链创建成功'
+            this.$router.push({
+              path: '/'
             })
-            this.$router.back()
           })
           .catch(res => {
             console.log(res)
-            this.$notify({
-              group: 'user',
-              title: '友链创建成功'
-            })
           })
       }
     }

@@ -26,8 +26,6 @@
   import postApi from '../../api/post'
   import {GET_TAG_ID_POST, GET_TAG_BY_ID} from '../../store/tag'
 
-  const VmBackTop = () => import('vue-multiple-back-top')
-
   export default {
     validate ({ params }) {
       // Must be a number
@@ -94,8 +92,7 @@
       }
     },
     components: {
-      postInfo,
-      VmBackTop
+      postInfo
     }
 
   }

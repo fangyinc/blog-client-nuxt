@@ -28,14 +28,13 @@
   import postSummary from '../components/common/PostSummary'
   // import postApi from '../api/post'
   import {GET_POST_LIST, SET_CURRENT_PAGE} from '../store/post'
-  const VmBackTop = () => import('vue-multiple-back-top')
+  // const VmBackTop = () => import('vue-multiple-back-top')
 
   export default {
     name: 'index',
     async fetch ({store}) {
       let page = 1
       store.dispatch('post/' + SET_CURRENT_PAGE, page)
-      console.log('进入首页，引起了服务端渲染')
       return store.dispatch('post/' + GET_POST_LIST, page)
     },
     data () {
@@ -60,8 +59,7 @@
       }
     },
     components: {
-      postSummary,
-      VmBackTop
+      postSummary
     }
   }
 </script>

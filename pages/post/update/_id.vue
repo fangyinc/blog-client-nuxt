@@ -67,7 +67,6 @@
   import mdEditor from '../../../components/common/MdEditor'
   import InfoCreate from '../../../components/common/InfoCreate'
   import postApi from '../../../api/post'
-  const VmBackTop = () => import('vue-multiple-back-top')
 
   export default {
     name: 'updatePostById',
@@ -215,8 +214,7 @@
     },
     components: {
       Editor: mdEditor,
-      NewInfo: InfoCreate,
-      VmBackTop
+      NewInfo: InfoCreate
     }
   }
 </script>

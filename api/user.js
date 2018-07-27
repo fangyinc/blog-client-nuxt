@@ -24,10 +24,23 @@ const newFriend = (params) => {
   return request('/friend', params, 'post')
 }
 
+const getFriendById = (id) => {
+  return request('/friend/' + id)
+}
+const updateFriendById = (id, params) => {
+  return request('/friend/' + id, params, 'put')
+}
+
+const deleteFriendById = (id) => {
+  return request('/friend/' + id, {}, 'delete')
+}
 export default {
   userRegister,
   userLogin,
   getUser,
   getAllFriend,
-  newFriend
+  newFriend,
+  updateFriendById,
+  getFriendById,
+  deleteFriendById
 }

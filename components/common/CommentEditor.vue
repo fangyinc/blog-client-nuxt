@@ -10,14 +10,23 @@
           <!--                 @change="onEditorChange($event)"
 -->
           <!--<section class="container">-->
-            <div class="quill-editor"
-                 v-model="tempContent"
+            <!--<div class="quill-editor"
+                 :content="tempContent"
+                 @change="onEditorChange($event)"
                  @blur="onEditorBlur($event)"
                  @focus="onEditorFocus($event)"
                  @ready="onEditorReady($event)"
                  v-quill:myQuillEditor="editorOption">
-            </div>
+            </div>-->
           <!--</section>-->
+          <quill-editor :content="tempContent"
+                        ref="myQuillEditor"
+                        :options="editorOption"
+                        @change="onEditorChange($event)"
+                        @blur="onEditorBlur($event)"
+                        @focus="onEditorFocus($event)"
+                        @ready="onEditorReady($event)">
+          </quill-editor>
         </v-card-text>
       </v-card>
       <v-card class="elevation-4">
@@ -59,6 +68,7 @@
   // import 'quill/dist/quill.snow.css'
   // import 'quill/dist/quill.bubble.css'
   // import {quillEditor} from 'vue-quill-editor'
+  import { quillEditor } from 'vue-quill-editor'
 
   export default {
     name: 'CommentEditor',
@@ -109,13 +119,11 @@
       }
     },
     mounted () {
-      console.log('this is current quill instance object', this.editor)
+      this.tempContent = this.content
     },
     watch: {
       content (val) {
-        setTimeout((res) => {
-          this.tempContent = val
-        }, 0)
+        this.tempContent = val
       }
     },
     methods: {
@@ -129,11 +137,8 @@
         console.log('editor ready!', quill)
       },
       onEditorChange ({quill, html, text}) {
-        console.log('editor change!', quill, html, text)
-        // alert(html)
-        // alert(this.content)
-        // this.content = html
-        this.$emit('change', html)
+        this.tempContent = html
+        this.$emit('change', this.tempContent)
       },
       upload () {
         if (this.tempContent === '') {
@@ -142,6 +147,9 @@
         }
         this.$emit('upload', this.tempContent)
       }
+    },
+    components: {
+      quillEditor
     }
   }
 </script>

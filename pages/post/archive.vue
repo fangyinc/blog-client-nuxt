@@ -43,7 +43,6 @@
 <script>
   import postApi from '../../api/post'
   import axios from 'axios'
-  const VmBackTop = () => import('vue-multiple-back-top')
 
   export default {
     name: 'archive',
@@ -73,9 +72,6 @@
         items: items,
         posts: posts
       }
-    },
-    components: {
-      VmBackTop
     }
   }
 </script>

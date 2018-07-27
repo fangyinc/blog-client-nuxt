@@ -23,8 +23,6 @@
   import postApi from '../../api/post'
   import {GET_SEC_ID_POST, GET_SEC_BY_ID} from '../../store/section'
 
-  const VmBackTop = () => import('vue-multiple-back-top')
-
   export default {
     validate ({ params }) {
       // Must be a number
@@ -91,8 +89,7 @@
       }
     },
     components: {
-      postInfo,
-      VmBackTop
+      postInfo
     }
 
   }
