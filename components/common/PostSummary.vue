@@ -1,6 +1,6 @@
 <template>
-  <nuxt-link :to="`/post/` + post.id" class="cfy-my-link">
-    <v-card class="my-3" hover>
+  <div>
+    <v-card class="my-3" hover :to="`/post/` + post.id">
       <v-card-media
           class="white--text"
           height="200px"
@@ -54,7 +54,7 @@
       </v-card-actions>
 
     </v-card>
-  </nuxt-link>
+  </div>
 </template>
 
 <script>

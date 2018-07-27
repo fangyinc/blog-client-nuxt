@@ -19,6 +19,9 @@
 </template>
 
 <script>
+  /**
+   * todo 这里显示的 infoName存在bug
+   */
   import postInfo from '../../components/common/PostInfo'
   import postApi from '../../api/post'
   const VmBackTop = () => import('vue-multiple-back-top')
