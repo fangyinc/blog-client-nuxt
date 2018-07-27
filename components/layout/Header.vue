@@ -97,13 +97,7 @@
         drawer: false,
         showSearch: false,
         appendIcon: null,
-        hiddenTitle: false,
-        userMenuItems: [
-          {name: '账户', url: '/zhanghu'},
-          {name: '写文章', url: '/post/create'},
-          {name: '添加友链', url: '/friend/create'},
-          {name: '注销', url: '/logout'}
-        ]
+        hiddenTitle: false
       }
     },
     methods: {
@@ -128,12 +122,23 @@
       isLogin () {
         return this.$store.state.user.isLogin
       },
+      user () {
+        return this.$store.state.user.authUser
+      },
       menuItems () {
         return [
           {url: '/post/archive', name: '归档', icon: 'archive', active: true},
           {url: '/friend', name: '友链', icon: 'link', active: true},
           {url: '/register', name: '注册', icon: 'person_add', active: !this.isLogin},
           {url: '/login', name: '登录', icon: 'person', active: !this.isLogin}
+        ]
+      },
+      userMenuItems () {
+        return [
+          {name: '账户', url: '/user/' + this.user.id},
+          {name: '写文章', url: '/post/create'},
+          {name: '添加友链', url: '/friend/create'},
+          {name: '注销', url: '/logout'}
         ]
       }
     },

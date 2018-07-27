@@ -4,7 +4,7 @@
       app
       @input="handleInput">
     <v-card>
-      <v-card-media src="https://my-blog-images.oss-cn-qingdao.aliyuncs.com/oss_test3.jpg" height="300px">
+      <v-card-media :src="user.backgroundImg" height="300px">
         <v-layout column class="media">
           <nuxt-link to="/">
             <v-card-title>
@@ -14,7 +14,7 @@
                   class="grey lighten-4"
                   to="/"
               >
-                <img src="https://my-blog-images.oss-cn-qingdao.aliyuncs.com/about_225.jpg" alt="avatar">
+                <img :src="user.avatarImg" alt="avatar">
               </v-avatar>
             </v-card-title>
           </nuxt-link>

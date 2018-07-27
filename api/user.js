@@ -15,7 +15,12 @@ const userRegister = params => {
 const getUser = (id) => {
   return request('/users/' + id)
 }
-
+const updateUserById = (id, params) => {
+  return request('/users/' + id, params, 'put')
+}
+const deleteUserById = (id) => {
+  return request('/users/' + id, {}, 'delete')
+}
 const getAllFriend = (page = 1) => {
   return request('/friend?page=' + (page - 1))
 }
@@ -42,5 +47,7 @@ export default {
   newFriend,
   updateFriendById,
   getFriendById,
-  deleteFriendById
+  deleteFriendById,
+  updateUserById,
+  deleteUserById
 }
