@@ -16,6 +16,9 @@ module.exports = {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
+    ],
+    script: [
+      { src: 'https://www.google-analytics.com/analytics.js' }
     ]
   },
   plugins: [
@@ -28,7 +31,6 @@ module.exports = {
     { src: '~/plugins/vue-notification.js', ssr: false },
     { src: '~/plugins/aliyun-oss.js', ssr: false },
     { src: '~/plugins/vue-back-top.js', ssr: false },
-    { src: '~/plugins/analytics.js', ssr: false },
     { src: '~/plugins/google-analytics.js', ssr: false }
   ],
   router: {
