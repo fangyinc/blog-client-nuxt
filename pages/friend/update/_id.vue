@@ -99,16 +99,24 @@
           imgUrl: this.imgUrl,
           about: this.about
         }
-        authApi.newFriend(params)
+        authApi.updateFriendById(this.$route.params.id, params)
           .then(res => {
             this.$log.debug(res.data)
             this.dialog = false
+            this.$notify({
+              group: 'user',
+              title: '友链更新成功'
+            })
             this.$router.push({
               path: '/'
             })
           })
           .catch(res => {
             console.log(res)
+            this.$notify({
+              group: 'user',
+              title: '友链更新失败'
+            })
           })
       }
     }
