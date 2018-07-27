@@ -44,7 +44,10 @@ module.exports = {
     'quill/dist/quill.snow.css',
     'quill/dist/quill.bubble.css'
   ],
-  dev: (process.env.NODE_ENV !== 'production'),
+  dev: (process.env.NODE_ENV === 'dev'),
+  env: {
+    defaultUserId: 1
+  },
   /*
   ** Customize the progress bar color
   */
