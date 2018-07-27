@@ -1,10 +1,10 @@
 <template>
 	<div>
     <post-detail :post="post"></post-detail>
-    <v-card class="elevation-4" v-if="post.comments.length">
+    <v-card class="elevation-4" v-if="commentsLength">
       <v-card-title>
         <div class="headline">
-          <span>留言 ({{post.comments.length}}条)</span>
+          <span>留言 ({{commentsLength}}条)</span>
         </div>
       </v-card-title>
       <v-container fluid grid-list-sm>
@@ -54,16 +54,16 @@
       return {
         // 经过测试发现这里如果使用this.post.title的话会在客户端渲染标题，
         // 所以直接在asyncData中返回标题，确保在服务端就能渲染标题
-        title: this.title
+        title: this.post.title
       }
     },
-    async asyncData ({route}) {
-      let post = await postApi.getPostById(route.params.id)
-        .then(res => { return res.data.body }).catch(err => console.log(err))
-      return {
-        post: post,
-        title: post.title
-      }
+    asyncData ({route, error}) {
+      return postApi.getPostById(route.params.id)
+        .then(res => { return {post: res.data.body} })
+        .catch(err => {
+          console.log(err)
+          error({ statusCode: 404, message: '没有这篇文章' })
+        })
     },
     data () {
       return {
@@ -142,6 +142,12 @@
       },
       commentToEditor () {
         return this.commentContent
+      },
+      commentsLength () {
+        if (this.post.comments) {
+          return this.post.comments.length
+        }
+        return 0
       }
     },
     components: {

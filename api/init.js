@@ -9,7 +9,8 @@ import {setAuthToken, resetAuthToken} from '../utils/auth'
 // axios 配置
 axios.defaults.timeout = 5000
 // axios.defaults.baseURL = process.env.baseUrl
-axios.defaults.baseURL = process.env.dev ? process.env.baseUrl : process.env.prodUrl
+
+axios.defaults.baseURL = process.env.baseUrl
 
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 

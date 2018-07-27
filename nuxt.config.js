@@ -44,9 +44,9 @@ module.exports = {
     'quill/dist/quill.snow.css',
     'quill/dist/quill.bubble.css'
   ],
-  dev: (process.env.NODE_ENV !== 'production'),
+  dev: (process.env.NODE_ENV === 'dev'),
   env: {
-    baseUrl: 'http://localhost:8801',
+    baseUrl: (process.env.NODE_ENV === 'dev') ? 'http://localhost:8801' : 'https://chengfangyin.cn:8443',
     prodUrl: 'https://chengfangyin.cn:8443',
     defaultUserId: 1
   },

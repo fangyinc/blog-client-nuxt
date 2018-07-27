@@ -5,7 +5,7 @@
   "author": "staneyffer",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "NODE_ENV=dev nuxt",
     "build": "nuxt build",
     "start": "NODE_ENV=production nuxt start",
     "generate": "nuxt generate"

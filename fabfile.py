@@ -61,6 +61,7 @@ def deploy(to_build=None):
         tasks.append(build())
     loop.run_until_complete(asyncio.wait(tasks))
     loop.close()
+    upload()
     pm2()
 
 def commit():
