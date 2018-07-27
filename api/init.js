@@ -9,7 +9,7 @@ import {setAuthToken, resetAuthToken} from '../utils/auth'
 // axios 配置
 axios.defaults.timeout = 5000
 // axios.defaults.baseURL = process.env.baseUrl
-axios.defaults.baseURL = process.env.baseUrl
+axios.defaults.baseURL = process.env.dev ? process.env.baseUrl : process.env.prodUrl
 
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
@@ -56,7 +56,7 @@ axios.interceptors.response.use(
   })
 
 export const request = (url, options = {}, method = 'get') => {
-  console.debug('request log: options data at api/init.js(' + method + ')')
+  console.debug('axios log: url is : ' + axios.defaults.baseURL)
   console.debug(options)
   let key = ~['delete', 'get', 'head'].indexOf(method) ? 'params' : 'data'
   return axios(Object.assign({

@@ -30,12 +30,12 @@ app_name = os.environ.get('ENV_APP_NAME')
 def upload():
     file_name = '.nuxt'
     upload_script = 'scp -r ' + local_dir + file_name + ' ' + env.user + '@' + env.hosts[0] + ':' + server_dir
+    print(upload_script)
     local(upload_script)
 
 async def build():
     local('rm -rf .nuxt')
     local('npm run build')
-    upload()
 
 async def push_and_pull():
     local('git push')
@@ -53,9 +53,15 @@ def pm2():
 def npm_install():
     with cd(server_dir):
         run('cnpm install')
-def deploy():
+
+def deploy(to_build=None):
     loop = asyncio.get_event_loop()
-    tasks = [build(), push_and_pull()]
+    tasks = [push_and_pull()]
+    if to_build != 'nb':
+        tasks.append(build())
     loop.run_until_complete(asyncio.wait(tasks))
     loop.close()
     pm2()
+
+def commit():
+    local('git add -p && git commit')

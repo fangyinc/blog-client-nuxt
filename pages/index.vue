@@ -35,6 +35,7 @@
     async fetch ({store}) {
       let page = 1
       store.dispatch('post/' + SET_CURRENT_PAGE, page)
+      console.log('进入首页，引起了服务端渲染')
       return store.dispatch('post/' + GET_POST_LIST, page)
     },
     data () {

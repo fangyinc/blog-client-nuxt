@@ -46,7 +46,8 @@ module.exports = {
   ],
   dev: (process.env.NODE_ENV !== 'production'),
   env: {
-    baseUrl: (process.env.NODE_ENV !== 'production') ? 'http://localhost:8801' : 'https://chengfangyin.cn:8443',
+    baseUrl: 'http://localhost:8801',
+    prodUrl: 'https://chengfangyin.cn:8443',
     defaultUserId: 1
   },
   /*
@@ -111,9 +112,10 @@ module.exports = {
           parallel: true
         })
       ]
-      if (!ctx.isDev) {
-        config.plugins = [...config.plugins, ...plugins]
-      }
+      console.log(plugins)
+      // if (!ctx.isDev) {
+      //   config.plugins = [...config.plugins, ...plugins]
+      // }
     }
   }
 }
