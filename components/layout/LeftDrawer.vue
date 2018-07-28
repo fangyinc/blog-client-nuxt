@@ -19,9 +19,11 @@
             </v-card-title>
           </nuxt-link>
           <v-spacer></v-spacer>
-          <v-card-title class="white--text pl-5 pt-5">
+          <v-card-title class="white--text mx-auto">
             <div class="display-1 pl-2 pt-5">{{user.username}}</div>
-            <span class="title">
+          </v-card-title>
+          <v-card-title class="white--text mx-auto">
+             <span >
 							{{user.signature}}
 						</span>
           </v-card-title>

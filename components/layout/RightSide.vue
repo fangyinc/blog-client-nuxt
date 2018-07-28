@@ -3,7 +3,8 @@
     <v-layout row wrap>
       <v-flex xs12 v-for="(item, index) in items" :key="index">
         <v-card>
-          <v-card-title class="right-title" align-center justify-center>{{item.title}}</v-card-title>
+          <v-card-title>
+            <span class="mx-auto headline" >{{item.title}}</span></v-card-title>
           <v-divider></v-divider>
           <v-list>
 
