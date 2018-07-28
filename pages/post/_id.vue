@@ -156,7 +156,8 @@
         if (this.post.id) {
           let firstPost = this.post
           data.push({ hid: 'description', name: 'description', content: firstPost.summary })
-          let keys = firstPost.tags.reduce((a, b) => { return a.name.concat(' | ' + b.name) })
+          let tagNames = firstPost.tags.map(t => { return t.name })
+          let keys = tagNames.reduce((a, b) => { return a.concat(' | ' + b) })
           data.push({ hid: 'keywords', name: 'keywords', content: keys + ' | ' + firstPost.category.name })
           return data
         }

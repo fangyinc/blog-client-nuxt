@@ -135,7 +135,7 @@
       },
       userMenuItems () {
         return [
-          {name: '账户', url: '/user/' + this.user.id},
+          {name: '账户', url: '/user/' + this.user.id || 1},
           {name: '写文章', url: '/post/create'},
           {name: '添加友链', url: '/friend/create'},
           {name: '注销', url: '/logout'}

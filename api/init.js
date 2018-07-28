@@ -10,7 +10,8 @@ import {setAuthToken, resetAuthToken} from '../utils/auth'
 axios.defaults.timeout = 5000
 // axios.defaults.baseURL = process.env.baseUrl
 
-axios.defaults.baseURL = (process.env.NODE_ENV !== 'production') ? 'http://localhost:8801' : 'https://chengfangyin.cn:8443'
+// axios.defaults.baseURL = (process.env.NODE_ENV !== 'production') ? 'http://localhost:8801' : 'https://chengfangyin.cn:8443'
+axios.defaults.baseURL = 'https://chengfangyin.cn:8443'
 
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
