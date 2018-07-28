@@ -54,7 +54,8 @@
       return {
         // 经过测试发现这里如果使用this.post.title的话会在客户端渲染标题，
         // 所以直接在asyncData中返回标题，确保在服务端就能渲染标题
-        title: this.post.title
+        title: this.post.title,
+        meta: this.headMeta
       }
     },
     async fetch ({route, store, error}) {
@@ -63,14 +64,6 @@
           error({ statusCode: 404, message: '没有这篇文章' })
         })
     },
-    // asyncData ({route, error}) {
-    //   return postApi.getPostById(route.params.id)
-    //     .then(res => { return {post: res.data.body} })
-    //     .catch(err => {
-    //       console.log(err)
-    //       error({ statusCode: 404, message: '没有这篇文章' })
-    //     })
-    // },
     data () {
       return {
         commentContent: '',
@@ -83,7 +76,6 @@
     },
     methods: {
       uploadComment (commentContent) {
-        // alert(this.commentContent)
         console.log(this.commentUser)
         let comment = {
           name: this.commentUser.name,
@@ -154,6 +146,21 @@
       },
       post () {
         return this.$store.state.post.postDetail
+      },
+      headMeta () {
+        /**
+         * 设置 meta: description 为文章的简介; keywords 为文章的标签及分类
+         * @type {Array}
+         */
+        let data = []
+        if (this.post.id) {
+          let firstPost = this.post
+          data.push({ hid: 'description', name: 'description', content: firstPost.summary })
+          let keys = firstPost.tags.reduce((a, b) => { return a.name.concat(' | ' + b.name) })
+          data.push({ hid: 'keywords', name: 'keywords', content: keys + ' | ' + firstPost.category.name })
+          return data
+        }
+        return data
       }
     },
     components: {

@@ -48,7 +48,8 @@
     name: 'archive',
     head () {
       return {
-        title: '归档'
+        title: '归档',
+        meta: this.headMeta
       }
     },
     async asyncData () {
@@ -71,6 +72,23 @@
       return {
         items: items,
         posts: posts
+      }
+    },
+    computed: {
+      headMeta () {
+        /**
+         * 设置 meta: description 为第一篇文章的简介; keywords 为第一篇文章的标签及分类
+         * @type {Array}
+         */
+        let data = []
+        if (this.posts.length > 0 && this.posts[0].length > 0) {
+          let firstPost = this.posts[0][0]
+          data.push({ hid: 'description', name: 'description', content: firstPost.summary })
+          let keys = firstPost.tags.reduce((a, b) => { return a.name.concat(' | ' + b.name) })
+          data.push({ hid: 'keywords', name: 'keywords', content: keys + ' | ' + firstPost.category.name })
+          return data
+        }
+        return data
       }
     }
   }

@@ -3,47 +3,30 @@
 /**
  * Created by Staneyffer on 18-7-28.
  */
-
-/*
-** 只在生成模式的客户端中使用
-*/
-if (process.BROWSER_BUILD && process.env.NODE_ENV === 'production') {
+export default ({ app }) => {
   /*
-  ** Google 统计分析脚本
+  ** Only run on client-side and only in production mode
   */
-  (function(i,s,o,g,r,a,m) {
-    i['GoogleAnalyticsObject']=r;
-    i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)
-    }, i[r].l=1*new Date();
-    a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];
-    a.async=1;a.src=g;
-    m.parentNode.insertBefore(a,m)
+  if (process.env.NODE_ENV !== 'production') return
+  /*
+  ** Include Google Analytics Script
+  */
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
   /*
-  ** 当前页的访问统计
+  ** Set the current page
   */
   ga('create', 'UA-86161353-3', 'auto')
-}
-
-export default ({ app: { router }, store }) => {
   /*
-  ** 每次路由变更时进行pv统计
+  ** Every time the route changes (fired on initialization too)
   */
-  router.afterEach((to, from) => {
+  app.router.afterEach((to, from) => {
     /*
-    ** 告诉 GA 增加一个 PV
+    ** We tell Google Analytics to add a `pageview`
     */
     ga('set', 'page', to.fullPath)
     ga('send', 'pageview')
   })
 }
-// <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86161353-3"></script>
-// <script>
-// window.dataLayer = window.dataLayer || [];
-// function gtag(){dataLayer.push(arguments);}
-// gtag('js', new Date());
-//
-// gtag('config', 'UA-86161353-3');
-// </script>

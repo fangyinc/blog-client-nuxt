@@ -30,7 +30,8 @@
     },
     head () {
       return {
-        title: '专栏(' + this.infoName + ')'
+        title: '专栏(' + this.infoName + ')',
+        meta: this.headMeta
       }
     },
     name: 'sectionId',
@@ -86,6 +87,21 @@
       },
       infoName () {
         return this.$store.state.section.info.name
+      },
+      headMeta () {
+        /**
+         * 设置 meta: description 为第一篇文章的简介; keywords 为第一篇文章的标签及分类
+         * @type {Array}
+         */
+        let data = []
+        if (this.posts.length > 0) {
+          let firstPost = this.posts[0]
+          data.push({ hid: 'description', name: 'description', content: firstPost.summary })
+          let keys = firstPost.tags.reduce((a, b) => { return a.name.concat(' | ' + b.name) })
+          data.push({ hid: 'keywords', name: 'keywords', content: keys + ' | ' + firstPost.category.name })
+          return data
+        }
+        return data
       }
     },
     components: {

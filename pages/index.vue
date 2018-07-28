@@ -37,6 +37,11 @@
       store.dispatch('post/' + SET_CURRENT_PAGE, page)
       return store.dispatch('post/' + GET_POST_LIST, page)
     },
+    head () {
+      return {
+        meta: this.headMeta
+      }
+    },
     data () {
       return {
         currentPage: 1
@@ -56,6 +61,21 @@
       },
       page () {
         return this.$store.state.post.pagination.currentPage
+      },
+      headMeta () {
+        /**
+         * 设置 meta: description 为首页第一篇文章的简介; keywords 为第一篇文章的标签及分类
+         * @type {Array}
+         */
+        let data = []
+        if (this.posts) {
+          let firstPost = this.posts[0]
+          data.push({ hid: 'description', name: 'description', content: firstPost.summary })
+          let keys = firstPost.tags.reduce((a, b) => { return a.name.concat(' | ' + b.name) })
+          data.push({ hid: 'keywords', name: 'keywords', content: keys + ' | ' + firstPost.category.name })
+          return data
+        }
+        return data
       }
     },
     components: {
