@@ -2,10 +2,6 @@
  * Created by Staneyffer on 18-7-24.
  */
 
-// const LOGIN = 'LOGIN'
-// const LOGOUT = 'LOGOUT'
-// const SAVE_USER = 'SAVE_USER'
-// const READ_USER = 'READ_USER'
 import authApi from '../api/user'
 import {setAuthToken, resetAuthToken} from '../utils/auth'
 import cookies from 'js-cookie'
