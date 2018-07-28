@@ -62,6 +62,10 @@ module.exports = {
     color: 'blue',
     height: '3px'
   },
+  modules: [
+    // 组件缓存, 默认最大缓存1000个组件，15分钟
+    ['@nuxtjs/component-cache', { max: 1000, maxAge: 1000 * 60 * 15 }]
+  ],
   /*
   ** Build configuration
   */

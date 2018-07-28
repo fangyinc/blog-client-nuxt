@@ -64,7 +64,7 @@
   import postApi from '../../api/post'
 
   export default {
-    name: 'create',
+    name: 'createPost',
     layout: 'simple',
     head () {
       return {

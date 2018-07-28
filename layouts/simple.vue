@@ -19,7 +19,7 @@
   import myHeader from '../components/layout/Header'
 
   export default {
-    name: 'simple',
+    name: 'SimpleLayout',
     components: {
       rightSide,
       myHeader

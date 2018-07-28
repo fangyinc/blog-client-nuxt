@@ -31,7 +31,7 @@
   // const VmBackTop = () => import('vue-multiple-back-top')
 
   export default {
-    name: 'index',
+    name: 'homePage',
     async fetch ({store}) {
       let page = 1
       store.dispatch('post/' + SET_CURRENT_PAGE, page)

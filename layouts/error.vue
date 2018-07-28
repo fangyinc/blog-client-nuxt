@@ -14,6 +14,7 @@
 
 <script>
   export default {
+    name: 'ErrorLayout',
     props: ['error'],
     layout: 'simple', // 你可以为错误页面指定自定义的布局,
     computed: {
