@@ -141,7 +141,7 @@
             this.$log.debug('Got all tags successfully')
           })
           .catch(res => {
-            this.$log.debug(res.data)
+            this.$log.debug(res)
           })
         postApi.getALlCate()
           .then(res => {
@@ -149,7 +149,7 @@
             this.$log.debug('Get all categories successfully')
           })
           .catch(res => {
-            this.$log.debug(res.data)
+            this.$log.debug(res)
           })
         postApi.getAllSection()
           .then(res => {
@@ -157,7 +157,7 @@
             this.$log.debug('Got all sections successfully')
           })
           .catch(res => {
-            this.$log.debug(res.data)
+            this.$log.debug(res)
           })
       },
       getData (data) {

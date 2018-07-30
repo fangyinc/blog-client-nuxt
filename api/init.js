@@ -56,7 +56,7 @@ axios.interceptors.response.use(
   })
 
 export const request = (url, options = {}, method = 'get') => {
-  console.debug('axios log: url is : ' + axios.defaults.baseURL)
+  console.debug('axios log: url is : ' + axios.defaults.baseURL + url)
   console.debug(options)
   let key = ~['delete', 'get', 'head'].indexOf(method) ? 'params' : 'data'
   return axios(Object.assign({

@@ -12,7 +12,7 @@ export const SET_TOKEN = 'SET_TOKEN'
 const SET_USER = 'SET_USER'
 
 export const state = () => ({
-  authUser: null,
+  authUser: {},
   token: null,
   isLogin: false
 })

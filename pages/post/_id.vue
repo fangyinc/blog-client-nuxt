@@ -27,15 +27,10 @@
       </no-ssr>
     </div>
     -->
-    <v-card>
-      <v-card-title>
-        <span class="headline mx-auto">评论</span>
-      </v-card-title>
+    <v-card class="elevation-6">
+
       <v-card-text>
-        <no-ssr placeholder="Loading... this is no ssr">
-          <!--<div id="lv-container" data-id="city" data-uid="MTAyMC8zMDA0OC82NjEy"></div>-->
-          <!--<livere-comment post-url="postUrl"></livere-comment>-->
-          <!--<vue-livere uid="MTAyMC8zMDA0OC82NjEy" refer="PAGE_URL_OR_SOME_UNIQUE_VALUE"></vue-livere>-->
+        <no-ssr placeholder="载入评论中....">
           <livere-comment id="city" uid="MTAyMC8zMDA0OC82NjEy"></livere-comment>
         </no-ssr>
       </v-card-text>
@@ -90,20 +85,7 @@
         }
       }
     },
-    mounted () {
-      // this.initLiverComment()
-    },
     methods: {
-      initLiverComment () {
-        setTimeout(() => {
-          let d = document
-          let s = d.createElement('script')
-          s.type = 'text/javascript'
-          s.async = true
-          s.src = 'https://cdn-city.livere.com/js/embed.dist.js'
-          ;(d.head || d.body).appendChild(s)
-        }, 0)
-      },
       uploadComment (commentContent) {
         console.log(this.commentUser)
         let comment = {

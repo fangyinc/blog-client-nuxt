@@ -129,7 +129,7 @@
             $vm.post = res.data.body
           })
           .catch(res => {
-            this.$log.debug(res.data)
+            this.$log.debug(res)
           })
       },
       upload () {
@@ -158,7 +158,7 @@
           })
           .catch(res => {
             console.log('文章修改失败')
-            console.log(res.data)
+            console.log(res)
           })
       },
       handleChange (val, html) {
@@ -184,7 +184,7 @@
             this.$log.debug('Got all tags successfully')
           })
           .catch(res => {
-            this.$log.debug(res.data)
+            this.$log.debug(res)
           })
         postApi.getALlCate()
           .then(res => {
@@ -192,7 +192,7 @@
             this.$log.debug('Get all categories successfully')
           })
           .catch(res => {
-            this.$log.debug(res.data)
+            this.$log.debug(res)
           })
         postApi.getAllSection()
           .then(res => {
@@ -200,7 +200,7 @@
             this.$log.debug('Got all sections successfully')
           })
           .catch(res => {
-            this.$log.debug(res.data)
+            this.$log.debug(res)
           })
       },
       getData (data) {

@@ -1,10 +1,5 @@
 <template>
   <div>
-    <!-- 来必力City版安装代码 -->
-    <!--<div id="lv-container" data-id="city" :data-uid="uid"></div>-->
-    <!--<div id="my-livere-id">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMDA0OC82NjEy"></div>
-    </div>-->
     <div id="lv-container"
          :data-id="id"
          :data-uid="uid"

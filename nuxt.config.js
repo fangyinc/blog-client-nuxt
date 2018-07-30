@@ -11,7 +11,7 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '基于Vuejs + nuxtjs + Vuetify搭建的个人博客' },
+      { hid: 'description', name: 'description', content: '计算机在读本科生' },
       { hid: 'keywords', name: 'keywords', content: '程序猿 | 计算机' }
     ],
     link: [
@@ -34,7 +34,6 @@ module.exports = {
     { src: '~/plugins/aliyun-oss.js', ssr: false },
     { src: '~/plugins/vue-back-top.js', ssr: false },
     { src: '~/plugins/google-analytics.js', ssr: false }
-    // { src: '~/plugins/Livere-comment.js', ssr: false }
   ],
   router: {
     middleware: ['auth']
