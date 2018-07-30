@@ -26,8 +26,6 @@
     // },
     props: ['id', 'uid'],
 
-    data () {
-    },
     mounted () {
       const ds = document.createElement('script');
       if (typeof LivereTower === 'function') return;
