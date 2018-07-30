@@ -1,37 +1,49 @@
 <template>
 	<div>
     <post-detail :post="post"></post-detail>
-    <v-card class="elevation-4" v-if="commentsLength">
+ <!--   <div>
+      <v-card class="elevation-4" v-if="commentsLength">
+        <v-card-title>
+          <div class="headline">
+            <span>留言 ({{commentsLength}}条)</span>
+          </div>
+        </v-card-title>
+        <v-container fluid grid-list-sm>
+          <v-layout row wrap align-center>
+            <v-flex v-for="(comment, i) in post.comments" :key="i" xs12 md12>
+              <comment-show
+                  :comment="comment"
+                  :canEdit="canEdit"
+                  @delete="deleteComment"
+                  @reply="handleReply"></comment-show>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-card>
+      <no-ssr>
+        <comment-editor id="cmd"
+                        :content="commentContent" :user="commentUser"
+                        @upload="uploadComment"></comment-editor>
+      </no-ssr>
+    </div>
+    -->
+    <v-card>
       <v-card-title>
-        <div class="headline">
-          <span>留言 ({{commentsLength}}条)</span>
-        </div>
+        <span class="headline mx-auto">评论</span>
       </v-card-title>
-      <v-container fluid grid-list-sm>
-        <v-layout row wrap align-center>
-          <v-flex v-for="(comment, i) in post.comments" :key="i" xs12 md12>
-            <!--<div >-->
-            <comment-show
-                :comment="comment"
-                :canEdit="canEdit"
-                @delete="deleteComment"
-                @reply="handleReply"></comment-show>
-            <!--</div>-->
-          </v-flex>
-        </v-layout>
-      </v-container>
-      <!--<v-pagination :length="post.comments.length" v-model="page"
-                    @input="pageChanged"
-                    :total-visible="7"></v-pagination>-->
+      <v-card-text>
+        <no-ssr placeholder="Loading... this is no ssr">
+          <!--<div id="lv-container" data-id="city" data-uid="MTAyMC8zMDA0OC82NjEy"></div>-->
+          <!--<livere-comment post-url="postUrl"></livere-comment>-->
+          <!--<vue-livere uid="MTAyMC8zMDA0OC82NjEy" refer="PAGE_URL_OR_SOME_UNIQUE_VALUE"></vue-livere>-->
+          <livere-comment id="city" uid="MTAyMC8zMDA0OC82NjEy"></livere-comment>
+        </no-ssr>
+      </v-card-text>
+
     </v-card>
-    <no-ssr>
-    <comment-editor id="cmd"
-                    :content="commentContent" :user="commentUser"
-                    @upload="uploadComment"></comment-editor>
-    </no-ssr>
-    <!--<no-ssr>-->
-      <vm-back-top></vm-back-top>
-    <!--</no-ssr>-->
+
+    <vm-back-top></vm-back-top>
+
   </div>
 </template>
 
@@ -42,7 +54,11 @@
   import {GET_POST_BY_ID} from '../../store/post'
   // import postApi from '../../api/post'
   import commentApi from '../../api/comment'
+  import livereComment from '../../components/common/LivereComment'
+
   const commentEditor = () => import('../../components/common/CommentEditor')
+  // const livereComment = () => import('../../components/common/LivereComment')
+  // const VueLivere = () => import('vue-livere/VueLivere')
 
   export default {
     validate ({ params }) {
@@ -74,7 +90,20 @@
         }
       }
     },
+    mounted () {
+      // this.initLiverComment()
+    },
     methods: {
+      initLiverComment () {
+        setTimeout(() => {
+          let d = document
+          let s = d.createElement('script')
+          s.type = 'text/javascript'
+          s.async = true
+          s.src = 'https://cdn-city.livere.com/js/embed.dist.js'
+          ;(d.head || d.body).appendChild(s)
+        }, 0)
+      },
       uploadComment (commentContent) {
         console.log(this.commentUser)
         let comment = {
@@ -147,6 +176,13 @@
       post () {
         return this.$store.state.post.postDetail
       },
+      postUrl () {
+        if (this.post.id) {
+          return process.env.deployUrl + '/post/' + this.post.id
+        } else {
+          return ''
+        }
+      },
       headMeta () {
         /**
          * 设置 meta: description 为文章的简介; keywords 为文章的标签及分类
@@ -167,7 +203,8 @@
     components: {
       postDetail,
       commentShow,
-      commentEditor
+      commentEditor,
+      livereComment
     }
   }
 </script>

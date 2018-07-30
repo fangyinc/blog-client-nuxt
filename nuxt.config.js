@@ -18,8 +18,9 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
     ]
+    // ,
     // script: [
-    //   { src: 'https://www.google-analytics.com/analytics.js' }
+    //   { src: 'https://cdn-city.livere.com/js/embed.dist.js' }
     // ]
   },
   plugins: [
@@ -33,6 +34,7 @@ module.exports = {
     { src: '~/plugins/aliyun-oss.js', ssr: false },
     { src: '~/plugins/vue-back-top.js', ssr: false },
     { src: '~/plugins/google-analytics.js', ssr: false }
+    // { src: '~/plugins/Livere-comment.js', ssr: false }
   ],
   router: {
     middleware: ['auth']
@@ -52,7 +54,9 @@ module.exports = {
   ],
   dev: (process.env.NODE_ENV !== 'production'),
   env: {
-    defaultUserId: 1
+    defaultUserId: 1,
+    deployUrl: 'https://chengfy.com',
+    livereUid: 'MTAyMC8zMDA0OC82NjEy'
   },
   /*
   ** Customize the progress bar color
