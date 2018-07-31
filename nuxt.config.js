@@ -12,7 +12,8 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '计算机在读本科生' },
-      { hid: 'keywords', name: 'keywords', content: '程序猿 | 计算机' }
+      { hid: 'keywords', name: 'keywords', content: '程序猿 | 计算机' },
+      { name: 'google-site-verification', content: 'tTx7EOZ0AutyQ_rLgDvL20FH2GhgdRSA1Ppu2AigO08'}
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
