@@ -5,6 +5,7 @@
 var requiresAuthPath = [
   '/post/update',
   '/post/create',
+  '/post/draft',
   '/friend/create',
   '/friend/update',
   '/user/'

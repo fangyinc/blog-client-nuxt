@@ -60,9 +60,10 @@
         .catch(err => {
           this.$log.debug(err)
         })
+      console.debug(items)
       let posts = await axios.all(items.map(p => {
         let date = new Date()
-        date.setFullYear(p[0], p[1] - 1)
+        date.setFullYear(p[0], (p[1] - 1), 15)
         return postApi.getPostByTime({date: date})
       }))
         .then(axios.spread((...res) => {

@@ -76,6 +76,10 @@ const getPostByTime = (date) => {
 const getSignature = () => {
   return request('/oss/sig')
 }
+const getDraftPost = (page = 1) => {
+  // 服务端分页是从0开始， 前端分页是从1开始，故需要减1
+  return request('/posts/draft?page=' + (page - 1))
+}
 
 export default {
   newPost,
@@ -98,5 +102,6 @@ export default {
   deleteSectionById,
   getTagById,
   getCateById,
-  getSectionById
+  getSectionById,
+  getDraftPost
 }

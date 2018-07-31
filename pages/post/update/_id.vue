@@ -26,6 +26,11 @@
                 v-model="post.img"
                 required
             ></v-text-field>
+            <v-select
+                :items="visibleSelects"
+                v-model="post.visible"
+                label="是否发布"
+            ></v-select>
           </v-card>
         </v-flex>
         <v-flex lg10>
@@ -78,6 +83,7 @@
     },
     data () {
       return {
+        visibleSelects: [true, false],
         post: {},
         codeStyle: '',
         htmlValue: '',
