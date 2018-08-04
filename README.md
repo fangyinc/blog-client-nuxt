@@ -1,6 +1,7 @@
 ## 简介
 这是一个基于[Vue.js](https://vuejs.org/)和[Nuxt](https://nuxtjs.org/)，采用[Vuetify](https://vuetifyjs.com)作为UI库，具有文章在线新建、更新、删除等功能的博客前端。
-在线预览: [我的的博客](https://chengfy.com)
+在线预览: [我的的博客](https://chengfy.com)  
+本博客的后端： [BlogServer](https://github.com/staneyffer/BlogServer)
 
 ## 主要功能
 - 用户管理： 用户的注册、登录以及个人信息的编辑
