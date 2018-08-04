@@ -63,7 +63,7 @@
           }
         },
         {
-          img: 'https://static.zhihu.com/static/favicon.ico',
+          img: 'https://my-blog-images.oss-cn-qingdao.aliyuncs.com/15333655901193223.ico',
           url: 'https://www.zhihu.com/people/cheng-fang-yin-72',
           styleObj: {
             height: '20px'
