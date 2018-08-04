@@ -13,11 +13,11 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '计算机在读本科生' },
       { hid: 'keywords', name: 'keywords', content: '程序猿 | 计算机' },
-      { name: 'google-site-verification', content: 'tTx7EOZ0AutyQ_rLgDvL20FH2GhgdRSA1Ppu2AigO08'}
+      {name: 'google-site-verification', content: 'tTx7EOZ0AutyQ_rLgDvL20FH2GhgdRSA1Ppu2AigO08'}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-      // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.0.13/css/all.css' }
     ]
     // ,
     // script: [
@@ -125,9 +125,9 @@ module.exports = {
           parallel: true
         })
       ]
-      // if (!ctx.isDev) {
-      //   config.plugins = [...config.plugins, ...plugins]
-      // }
+      if (!ctx.isDev) {
+        config.plugins = [...config.plugins, ...plugins]
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app absolute>
     <my-header></my-header>
     <v-content>
       <v-container fluid>
@@ -15,13 +15,14 @@
     </v-content>
     <notifications group="user" position="top center" :duration="1500"/>
     <notifications group="post" position="top center" :duration="1500"/>
-    <v-footer app></v-footer>
+    <my-footer></my-footer>
   </v-app>
 
 </template>
 <script>
   import rightSide from '../components/layout/RightSide'
   import myHeader from '../components/layout/Header'
+  import myFooter from '../components/layout/Footer'
 
   export default {
     name: 'DefaultLayout',
@@ -32,7 +33,8 @@
     },
     components: {
       rightSide,
-      myHeader
+      myHeader,
+      myFooter
     }
   }
 </script>
