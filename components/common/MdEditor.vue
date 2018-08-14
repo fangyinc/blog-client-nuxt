@@ -1,7 +1,7 @@
 <template>
   <div>
     <mavon-editor
-        :value="mdValue"
+        :value="mdData"
         :codeStyle="codeStyle"
         @change="handleChange"
         @imgAdd="$imgAdd"
@@ -29,14 +29,17 @@
     },
     data () {
       return {
-        mdData: '',
         signature: {},
         ossClient: {}
       }
     },
     mounted () {
-      this.mdData = this.mdValue
       this.getSignature()
+    },
+    computed: {
+      mdData () {
+        return this.mdValue
+      }
     },
     methods: {
       handleChange (val, html) {

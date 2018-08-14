@@ -31,6 +31,7 @@
                 v-model="post.visible"
                 label="是否发布"
             ></v-select>
+            <v-btn @click="insertCopyright">插入版权说明</v-btn>
           </v-card>
         </v-flex>
         <v-flex lg10>
@@ -128,6 +129,9 @@
       }
     },
     methods: {
+      insertCopyright () {
+        this.post.content = this.post.content + process.env.copyrightText
+      },
       getPost () {
         let $vm = this
         postApi.getPostById(this.$route.params.id)

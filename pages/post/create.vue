@@ -28,6 +28,7 @@
                 v-model="post.visible"
                 label="是否发布"
             ></v-select>
+            <v-btn @click="insertCopyright">插入版权说明</v-btn>
           </v-card>
         </v-flex>
         <v-flex lg10>
@@ -45,7 +46,7 @@
           ></v-text-field>
           <v-card class="elevation-8">
             <!--<mavon-editor v-model="mdValue" code-style="monokai" ref="mavon"></mavon-editor>-->
-            <editor @change="handleChange">
+            <editor :mdValue="post.content" @change="handleChange">
             </editor>
           </v-card>
         </v-flex>
@@ -100,6 +101,9 @@
       }
     },
     methods: {
+      insertCopyright () {
+        this.post.content = this.post.content + process.env.copyrightText
+      },
       handleChange (val, html) {
         this.post.content = val
         this.post.contentHtml = html
