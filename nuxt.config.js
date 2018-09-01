@@ -80,10 +80,10 @@ module.exports = {
   build: {
     babel: {
       plugins: [
-        ["transform-imports", {
-          "vuetify": {
-            "transform": "vuetify/es5/components/${member}",
-            "preventFullImport": true
+        ['transform-imports', {
+          'vuetify': {
+            'transform': "vuetify/es5/components/${member}",
+            'preventFullImport': true
           }
         }]
       ]
@@ -122,8 +122,8 @@ module.exports = {
             compress: {
               warnings: false,
               drop_debugger: true,
-              drop_console: true,
-            },
+              drop_console: true
+            }
           },
           sourceMap: false,
           parallel: true

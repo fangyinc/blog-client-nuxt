@@ -70,7 +70,8 @@
 </template>
 
 <script>
-  import mdEditor from '../../../components/common/MdEditor'
+  // import mdEditor from '../../../components/common/MdEditor'
+  import NewEditor from '../../../components/common/NewEditor'
   import InfoCreate from '../../../components/common/InfoCreate'
   import postApi from '../../../api/post'
 
@@ -145,9 +146,6 @@
       upload () {
         this.post.contentHtml = this.htmlValue
         this.post.content = this.mdValue
-        // let category = this.post.category
-        // let tags = this.post.tags
-        // let sections = this.post.sections
         let params = {
           post: this.post,
           category: this.categoryParam,
@@ -223,7 +221,7 @@
       }
     },
     components: {
-      Editor: mdEditor,
+      Editor: NewEditor,
       NewInfo: InfoCreate
     }
   }

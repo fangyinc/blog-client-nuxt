@@ -103,13 +103,18 @@
       }
     },
     mounted () {
-      var $vm = this
+      let $vm = this
+      if (process.browser) {
+        $vm.mermaid = require('mermaid')
+        $vm.echarts = require('echarts')
+      }
       $vm.loadExternalLink('markdown_css', 'css')
       $vm.loadExternalLink('katex_css', 'css')
       $vm.loadExternalLink('katex_js', 'js')
       $vm.loadExternalLink('hljs_js', 'js')
       $vm.codeStyleChange($vm.codeStyle, true)
     },
+
     methods: {
       loadExternalLink (name, type, callback) {
         if (typeof this.s_external_link[name] !== 'function') {
@@ -183,6 +188,34 @@
     watch: {
       codeStyle: function (val) {
         this.codeStyleChange(val)
+      },
+      post: {
+        immediate: true,
+        handler (val) {
+          this.$nextTick(() => {
+            if (process.browser) {
+              // 渲染chart
+              const changeEchart = (option, element) => {
+                let w = option.hasOwnProperty('width') ? (option.width + 'px') : 'auto'
+                let h = option.hasOwnProperty('height') ? (option.height + 'px') : '400px'
+                element.style.width = w
+                element.style.height = h
+              }
+              let chartElements = document.querySelectorAll('.echarts-data')
+              let showElements = document.querySelectorAll('.echarts')
+              for (let i = 0; i < chartElements.length; i++) {
+                let element = chartElements[i]
+                let options = JSON.parse(element.textContent)
+                changeEchart(options, showElements[i])
+                let chart = this.echarts.init(showElements[i])
+                chart.setOption(options)
+                console.log(options)
+              }
+              // 渲染mermaid代码
+              this.mermaid.init(undefined, document.querySelectorAll('.mermaid'))
+            }
+          })
+        }
       }
     }
   }

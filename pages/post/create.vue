@@ -65,7 +65,9 @@
 </template>
 
 <script>
-  import mdEditor from '../../components/common/MdEditor'
+  // import mdEditor from '../../components/common/MdEditor'
+  import NewEditor from '../../components/common/NewEditor'
+
   import InfoCreate from '../../components/common/InfoCreate'
   import postApi from '../../api/post'
 
@@ -185,7 +187,7 @@
     },
     components: {
       NewInfo: InfoCreate,
-      Editor: mdEditor
+      Editor: NewEditor
     }
   }
 </script>
