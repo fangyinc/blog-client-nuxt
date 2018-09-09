@@ -54,7 +54,7 @@ module.exports = {
   ],
   dev: (process.env.NODE_ENV !== 'production'),
   env: {
-    defaultUserId: 1,
+    defaultUserId: 1, // 服务器上是1,本地是2
     deployUrl: 'https://chengfy.com',
     livereUid: 'MTAyMC8zMDA0OC82NjEy',
     copyrightText: '\n\n---\n' +

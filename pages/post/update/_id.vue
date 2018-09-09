@@ -39,7 +39,6 @@
               label="标题"
               v-model="post.title"
               required
-              readonly
           ></v-text-field>
 
           <v-text-field
