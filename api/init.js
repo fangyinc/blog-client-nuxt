@@ -51,8 +51,9 @@ axios.interceptors.response.use(
           console.log('http请求失败, statusCode: ' + error.response.status)
           break
       }
+      return error.response.data !== undefined ? Promise.reject(error.response.data) : error.response
     }
-    return Promise.reject(error.response.data)
+    return Promise.reject(error)
   })
 
 export const request = (url, options = {}, method = 'get') => {
