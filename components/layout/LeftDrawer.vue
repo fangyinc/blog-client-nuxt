@@ -4,7 +4,7 @@
       app
       @input="handleInput">
     <v-card>
-      <v-card-media :src="user.backgroundImg" height="300px">
+      <v-card-media src="user.backgroundImg" height="300px">
         <v-layout column class="media">
           <nuxt-link to="/">
             <v-card-title>

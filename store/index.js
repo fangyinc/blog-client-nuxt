@@ -19,6 +19,7 @@ export const actions = {
   nuxtServerInit (store, context) {
     const cookies = cookie.parse(context.req.headers.cookie || '')
     let userId = null
+    // 已经登录
     if (cookies.hasOwnProperty('access-token')) {
       setAuthToken(cookies['access-token'])
       userId = cookies['user-id']

@@ -9,7 +9,7 @@ import {setAuthToken, resetAuthToken} from '../utils/auth'
 // axios 配置
 axios.defaults.timeout = 5000
 
-axios.defaults.baseURL = (process.env.NODE_ENV !== 'production') ? 'http://localhost:8801' : 'https://chengfangyin.cn:8443'
+axios.defaults.baseURL = (process.env.NODE_ENV !== 'production') ? 'http://localhost:8801' : 'https://chengfy.com/api'
 
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 

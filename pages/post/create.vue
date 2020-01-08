@@ -133,6 +133,10 @@
           .catch(res => {
             this.$log.debug('新建文章失败')
             this.$log.debug(res)
+            this.$notify({
+              group: 'post',
+              title: '新建文章失败: ' + res.message
+            })
           })
       },
       handleTagChanged (data) {

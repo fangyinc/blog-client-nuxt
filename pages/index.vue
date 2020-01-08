@@ -68,7 +68,7 @@
          * @type {Array}
          */
         let data = []
-        if (this.posts) {
+        if (this.posts && this.posts.length > 0) {
           let firstPost = this.posts[0]
           data.push({ hid: 'description', name: 'description', content: firstPost.summary })
           let tagNames = firstPost.tags.map(t => { return t.name })
