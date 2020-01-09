@@ -10,7 +10,6 @@
       multiple
       small-chips
       solo
-      @change="handChange"
   >
     <template slot="no-data">
       <v-list-tile>
@@ -116,6 +115,8 @@
       menu: false,
       // model: [
       // ],
+      selectModel: [
+      ],
       x: 0,
       search: null,
       y: 0
@@ -131,10 +132,10 @@
               text: v,
               color: this.colors[this.nonce - 1]
             }
-
             this.items.push(v)
-
+            this.selectModel.push(v)
             this.nonce++
+            this.handChange()
           }
           return v
         })
@@ -164,9 +165,10 @@
           .indexOf(query.toString().toLowerCase()) > -1
       },
       handChange () {
-        let info = this.model.map(v => {
+        let info = this.selectModel.map(v => {
           return {name: v.text}
         })
+        this.$log.debug('info', info)
         this.$emit('change', info)
       }
     }
