@@ -124,24 +124,22 @@
 
     watch: {
       model (val, prev) {
+        // 数组长度没有发生变化
         if (val.length === prev.length) return
-
         this.model = val.map(v => {
-          if (typeof v === 'string') {
+          if (typeof v === 'string' && v.length > 0) {
             v = {
               text: v,
               color: this.colors[this.nonce - 1]
             }
-            this.items.push(v)
-            this.selectModel.push(v)
+            this.model.push(v)
             this.nonce++
-            this.handChange()
           }
           return v
         })
+        this.handChange()
       }
     },
-
     methods: {
       edit (index, item) {
         if (!this.editing) {
@@ -165,7 +163,7 @@
           .indexOf(query.toString().toLowerCase()) > -1
       },
       handChange () {
-        let info = this.selectModel.map(v => {
+        let info = this.model.map(v => {
           return {name: v.text}
         })
         this.$log.debug('info', info)

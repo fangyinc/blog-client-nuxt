@@ -13,11 +13,11 @@
             </v-card-title>
 
             <new-info :items="categories" :size="1" label="选择或新建一个分类"
-                      :model="cateModel" @change="handleCateChanged"/>
+                      :model.sync="cateModel" @change="handleCateChanged"/>
             <new-info :items="tags" :size="5" label="选择或新建标签"
-                      :model="tagModel" @change="handleTagChanged"/>
+                      :model.sync="tagModel" @change="handleTagChanged"/>
             <new-info :items="sections" :size="5" label="选择或新建专栏"
-                      :model="secModel" @change="handleSecChanged"
+                      :model.sync="secModel" @change="handleSecChanged"
                       style="position: relative"/>
             <!--<new-info/>-->
             <!--<v-spacer></v-spacer>-->
@@ -95,38 +95,15 @@
         tagsParams: [],
         categoryParam: {},
         sectionsParams: [],
+        cateModel: [],
+        tagModel: [],
+        secModel: [],
         postUrl: '/post/'
       }
     },
-    mounted () {
+    created () {
       this.getPost()
       this.initInfo()
-    },
-    computed: {
-      cateModel () {
-        if (!this.post.category) {
-          return []
-        }
-        let temp = []
-        temp.push({text: this.post.category.name})
-        return temp
-      },
-      tagModel () {
-        if (!this.post.tags) {
-          return []
-        }
-        return this.post.tags.map(t => {
-          return {text: t.name}
-        })
-      },
-      secModel () {
-        if (!this.post.sections) {
-          return []
-        }
-        return this.post.sections.map(t => {
-          return {text: t.name}
-        })
-      }
     },
     methods: {
       insertCopyright () {
@@ -137,6 +114,16 @@
         postApi.getPostById(this.$route.params.id)
           .then(res => {
             $vm.post = res.data.body
+            $vm.cateModel.push({text: $vm.post.category.name})
+            $vm.post.tags.map(t => {
+              $vm.tagModel.push({text: t.name})
+              $vm.tagsParams.push({name: t.name})
+            })
+            $vm.post.sections.map(t => {
+              $vm.secModel.push({text: t.name})
+              $vm.sectionsParams.push({name: t.name})
+            })
+            $vm.categoryParam = {name: $vm.post.category.name}
           })
           .catch(res => {
             this.$log.debug(res)
@@ -145,6 +132,8 @@
       upload () {
         this.post.contentHtml = this.htmlValue
         this.post.content = this.mdValue
+        this.$log.debug('tagModel: ', this.tagModel)
+
         let params = {
           post: this.post,
           category: this.categoryParam,
