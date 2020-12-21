@@ -100,7 +100,9 @@
     },
     computed: {
       user () {
-        return this.$store.state.user.authUser
+        let u = this.$store.state.user.authUser
+        u.backgroundImg = u.backgroundImg || ''
+        return u
       },
       postInfoItems () {
         let arr = []

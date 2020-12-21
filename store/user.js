@@ -13,9 +13,9 @@ const SET_USER = 'SET_USER'
 
 export const state = () => ({
   authUser: {
-    backgroundImg: null,
-    avatarImg: null,
-    username: null,
+    backgroundImg: '',
+    avatarImg: '',
+    username: '',
     signature: null
   },
   token: null,
